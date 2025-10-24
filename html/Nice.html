@@ -44,7 +44,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#student's-projects" class="nav-link">Students Projects</a>
+                        <a href="#students-projects" class="nav-link">Students Projects</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a href="#blog" class="nav-link">
@@ -62,15 +62,9 @@
             </nav>
 
             <div class="nav-item contact-menu">
-                <a href="#contact" class="contact-btn">
+                <a href="contactus.html" class="contact-btn">
                     Contact Us
-                    <span class="dropdown-arrow">▼</span>
                 </a>
-                <div class="dropdown">
-                    <a href="https://t.me/BreakLoop" target="_blank" rel="noopener">BreakLoop</a>
-                    <a href="https://github.com/SDH4114" target="_blank" rel="noopener">SDH4114</a>
-                    <a href="https://github.com/Ravenfield228" target="_blank" rel="noopener">Ravenfield228</a>
-                </div>
             </div>
 
             <button class="burger" id="burger" aria-label="Toggle menu">
@@ -294,19 +288,19 @@
             </div>
             <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/chaos.net2000@gmail.com" accept-charset="UTF-8" autocomplete="on">
                 <div class="form-group">
-                    <label for="name">Full Name *</label>
+                    <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address *</label>
+                    <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="school">School/Organization *</label>
+                    <label for="school">School/Organization</label>
                     <input type="text" id="school" name="school" required>
                 </div>
                 <div class="form-group">
-                    <label for="country">Country *</label>
+                    <label for="country">Country</label>
                     <input type="text" id="country" name="country" required>
                 </div>
                 <div class="form-group">
@@ -345,12 +339,6 @@
                     <h3>Dunya Horizons</h3>
                     <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
                     <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Educational travel and sustainability experiences for global citizens.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">f</a>
-                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
-                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>Programs</h3>
@@ -371,14 +359,13 @@
                     <h3>Contact</h3>
                     <ul class="footer-links">
                         <li>Email: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a></li>
-                        <li>Phone: +1 (555) 123-4567</li>
-                        <li>Address: 123 Education Lane</li>
-                        <li>Global City, GC 12345</li>
+                        <li>Phone: <a href="+994 (050) 500-4114">+994 (050) 500-4114</a></li>
+                        <li>Address: Pushkin's Street 44</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Dunya Horizons. All rights reserved. | <a href="#privacy" style="color: inherit;">Privacy Policy</a> | <a href="#terms" style="color: inherit;">Terms of Service</a></p>
+                <p>&copy; 2077 Dunya Horizons. All rights reserved. | <a href="#privacy" style="color: inherit;">Privacy Policy</a> | <a href="#terms" style="color: inherit;">Terms of Service</a></p>
             </div>
         </div>
     </footer>
@@ -493,7 +480,7 @@
             if (!name || !emailOk || !school || !country) {
                 formMessage.className = 'form-message error';
                 formMessage.style.display = 'block';
-                formMessage.textContent = 'Заполните корректно все обязательные поля (Имя, Email, Организация/Школа, Страна).';
+                formMessage.textContent = 'Please complete all required fields correctly (Full Name, Email, School/Organization, Country).';
                 return;
             }
 
@@ -503,7 +490,7 @@
             formMessage.style.display = 'block';
             formMessage.setAttribute('role', 'status');
             formMessage.setAttribute('aria-live', 'polite');
-            formMessage.textContent = 'Отправляем...';
+            formMessage.textContent = 'Sending...';
 
             const payload = {
                 name,
@@ -532,12 +519,12 @@
                 if (!response.ok) throw new Error('Send error');
 
                 formMessage.className = 'form-message success';
-                formMessage.textContent = 'Спасибо! Мы получили ваше сообщение и скоро свяжемся с вами.';
+                formMessage.textContent = 'Thank you! We have received your message and will contact you soon.';
                 contactForm.reset();
             } catch (error) {
                 // Fallback to standard POST if AJAX fails
                 formMessage.className = 'form-message';
-                formMessage.textContent = 'Соединение нестабильно. Выполняем стандартную отправку...';
+                formMessage.textContent = 'Connection is unstable. Switching to standard submission...';
                 if (replytoHidden) replytoHidden.value = email;
                 HTMLFormElement.prototype.submit.call(contactForm);
             } finally {
