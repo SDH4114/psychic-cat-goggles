@@ -43,6 +43,9 @@
                             <a href="#camps">Summer Camps</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a href="#student's-projects" class="nav-link">Students Projects</a>
+                    </li>
                     <!-- <li class="nav-item">
                         <a href="#blog" class="nav-link">
                             Blog
@@ -58,7 +61,17 @@
                 </ul>
             </nav>
 
-            <a href="#contact" class="contact-btn">Contact Us</a>
+            <div class="nav-item contact-menu">
+                <a href="#contact" class="contact-btn">
+                    Contact Us
+                    <span class="dropdown-arrow">▼</span>
+                </a>
+                <div class="dropdown">
+                    <a href="https://t.me/BreakLoop" target="_blank" rel="noopener">BreakLoop</a>
+                    <a href="https://github.com/SDH4114" target="_blank" rel="noopener">SDH4114</a>
+                    <a href="https://github.com/Ravenfield228" target="_blank" rel="noopener">Ravenfield228</a>
+                </div>
+            </div>
 
             <button class="burger" id="burger" aria-label="Toggle menu">
                 <span></span>
@@ -183,7 +196,7 @@
                     <span class="stat-label">Service Hours</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" data-target="45">0</span>
+                    <span class="stat-number" data-target="52">0</span>
                     <span class="stat-label">Countries Visited</span>
                 </div>
                 <div class="stat">
@@ -279,7 +292,7 @@
                 <h2>Plan Your Journey</h2>
                 <p>Ready to create an unforgettable educational experience? Let's start the conversation.</p>
             </div>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/chaos.net2000@gmail.com" accept-charset="UTF-8" autocomplete="on">
                 <div class="form-group">
                     <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -312,6 +325,11 @@
                     <label for="message">Message</label>
                     <textarea id="message" name="message" placeholder="Tell us about your group, goals, and any questions you have..."></textarea>
                 </div>
+                <input type="hidden" name="_subject" value="Plan Your Journey Inquiry">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_from" value="chaos.net2000@gmail.com">
+                <input type="hidden" name="_replyto" value="">
                 <input type="text" name="honeypot" style="display:none;">
                 <button type="submit" class="submit-btn">Send Message</button>
                 <div class="form-message" id="formMessage"></div>
@@ -352,7 +370,7 @@
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <ul class="footer-links">
-                        <li>Email: chaos.net2000@gmail.com</li>
+                        <li>Email: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a></li>
                         <li>Phone: +1 (555) 123-4567</li>
                         <li>Address: 123 Education Lane</li>
                         <li>Global City, GC 12345</li>
@@ -453,26 +471,78 @@
 
         window.addEventListener('scroll', animateCounters);
 
-        // Form submission
+        // Form submission (AJAX + automatic fallback)
         const contactForm = document.getElementById('contactForm');
         const formMessage = document.getElementById('formMessage');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const replytoHidden = contactForm.querySelector('input[name="_replyto"]');
 
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Check honeypot
-            if (contactForm.honeypot.value) {
+            // honeypot check
+            if (contactForm.honeypot.value) return;
+
+            // Basic validation
+            const name = contactForm.name.value.trim();
+            const email = contactForm.email.value.trim();
+            const school = contactForm.school.value.trim();
+            const country = contactForm.country.value.trim();
+            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (!name || !emailOk || !school || !country) {
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Заполните корректно все обязательные поля (Имя, Email, Организация/Школа, Страна).';
                 return;
             }
 
-            // Simulate form submission
-            formMessage.className = 'form-message success';
-            formMessage.textContent = "Thank you! We'll get back to you within 24 hours.";
-            contactForm.reset();
+            // UI state
+            submitBtn.disabled = true;
+            formMessage.className = 'form-message';
+            formMessage.style.display = 'block';
+            formMessage.setAttribute('role', 'status');
+            formMessage.setAttribute('aria-live', 'polite');
+            formMessage.textContent = 'Отправляем...';
 
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
+            const payload = {
+                name,
+                email,
+                organization: school,
+                country,
+                program: contactForm.program.value || '',
+                message: contactForm.message.value.trim(),
+                _subject: 'Plan Your Journey Inquiry',
+                _template: 'table',
+                _captcha: 'false',
+                _from: 'chaos.net2000@gmail.com',
+                _replyto: email
+            };
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/chaos.net2000@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error('Send error');
+
+                formMessage.className = 'form-message success';
+                formMessage.textContent = 'Спасибо! Мы получили ваше сообщение и скоро свяжемся с вами.';
+                contactForm.reset();
+            } catch (error) {
+                // Fallback to standard POST if AJAX fails
+                formMessage.className = 'form-message';
+                formMessage.textContent = 'Соединение нестабильно. Выполняем стандартную отправку...';
+                if (replytoHidden) replytoHidden.value = email;
+                HTMLFormElement.prototype.submit.call(contactForm);
+            } finally {
+                submitBtn.disabled = false;
+            }
         });
 
         // Smooth scroll for all anchor links

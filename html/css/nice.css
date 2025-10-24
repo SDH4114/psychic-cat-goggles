@@ -84,6 +84,7 @@
             gap: 0.25rem;
             transition: color 0.2s;
             font-weight: 650;
+            font-size: 1.2rem;
         }
 
         .nav-link:hover, .nav-link:focus {
@@ -152,12 +153,25 @@
             font-weight: 600;
             transition: all 0.2s;
             border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
         }
 
         .contact-btn:hover {
             background: transparent;
             color: var(--primary);
             transform: translateY(-2px);
+        }
+
+        .contact-menu:hover .contact-btn {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .contact-menu .dropdown a {
+            overflow-wrap: anywhere;
         }
 
         .burger {
@@ -671,6 +685,12 @@
         .form-message.success {
             background: #d1fae5;
             color: #065f46;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
             display: block;
         }
 
