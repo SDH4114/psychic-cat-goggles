@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dunya Horizons — Викторина: День Победы Азербайджана</title>
+  <link rel="stylesheet" href="css/nice.css"/>
+  <link rel="icon" type="image/png" href="img/horizon.png"/>
+  <meta name="description" content="Интерактивная викторина в стиле «Кто хочет стать миллионером?» на тему Дня Победы в Азербайджане."/>
+</head>
+<style>
+  /* Карточка викторины и заголовки */
+  .card { border-radius: 18px; box-shadow: 0 12px 30px rgba(0,0,0,.06); }
+  .card-body { padding: 36px; }
+  #questionText { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--heading, #0f172a); }
+
+  /* Варианты ответа — аккуратные «пилюли» в вашем стиле */
+  #options { display: grid; gap: .75rem; }
+  .btn.option{
+    text-align: left; padding: 14px 16px; border-radius: 14px;
+    background: #fff; border: 1px solid rgba(15,23,42,.08);
+    font-size: 17px; line-height: 1.35;
+    transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .btn.option:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.06); border-color: rgba(16,185,129,.35); }
+  .btn.option:disabled{ opacity:.9; cursor: default; }
+
+  /* Плашки прогресса/счёта */
+  .pill{ font-weight:600; letter-spacing:.2px; }
+  #scorePill{ color: var(--heading, #0f172a); }
+
+  /* Итоговый экран */
+  .result-wrap{ display:flex; align-items:center; justify-content:center; gap:1.25rem; flex-wrap:wrap; }
+  .result-stats p{ margin:.25rem 0; font-size: 15px; color: var(--heading, #0f172a); }
+  .result-actions{ margin-top: 1rem; display:flex; gap:.5rem; justify-content:center; }
+
+  /* Круг прогресса */
+  .ring{ position:relative; width: 240px; height: 240px; }
+  .ring svg{ width:100%; height:100%; transform: rotate(-90deg); }
+  .ring-bg{ stroke: rgba(15,23,42,.08); stroke-width: 14; fill:none; }
+  .ring-progress{ stroke: var(--primary, #10B981); stroke-width: 14; stroke-linecap: round; fill:none; transition: stroke-dashoffset .9s ease; }
+  .ring-label{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .ring-score{ font-size: 24px; font-weight: 800; color: var(--heading, #0f172a); }
+    /* Красивая кнопка «Пройти ещё раз» */
+  #restartBtn{
+    background: linear-gradient(135deg, var(--primary, #10B981), var(--secondary, #0EA5A4));
+    color:#fff; border:none; border-radius: 999px; padding: 12px 22px;
+    font-weight: 800; letter-spacing:.2px; box-shadow: 0 10px 22px rgba(16,185,129,.25);
+    transition: transform .08s ease, box-shadow .25s ease, filter .25s ease;
+  }
+  #restartBtn:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(16,185,129,.32); filter: saturate(1.05); }
+  #restartBtn:active{ transform: translateY(0) scale(.98); }
+
+  /* Список обзора ответов */
+  .review-list{ margin-top: 1.25rem; display:grid; gap:.75rem; }
+  .review-item{ background:#fff; border:1px solid rgba(15,23,42,.08); border-radius:14px; padding:12px 14px; }
+  .review-item.is-correct{ border-color: rgba(30,142,62,.35); }
+  .review-item.is-wrong{ border-color: rgba(197,34,31,.35); }
+  .review-q{ font-weight:700; color: var(--heading, #0f172a); display:flex; align-items:center; gap:.5rem; }
+  .badge{ display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:999px; background: rgba(15,23,42,.06); font-weight:800; font-size:12px; }
+  .review-a{ margin-top:.4rem; display:flex; gap:.5rem; flex-wrap:wrap; }
+  .chip{ font-size:13px; padding:6px 10px; border-radius:999px; border:1px solid rgba(15,23,42,.08); background:#fff; }
+  .chip.chosen{ border-color: rgba(0,0,0,.12); }
+  .chip.correct{ border-color: rgba(30,142,62,.35); color: #1e8e3e; }
+  .chip.wrong{ border-color: rgba(197,34,31,.35); color: #c5221f; }
+
+  /* Линейный прогресс сверху */
+  .progress-wrap{ height:6px; background: rgba(15,23,42,.08); border-radius:999px; overflow:hidden; margin-top:.5rem; }
+  .progress-bar{ height:100%; width:0%; background: linear-gradient(90deg, var(--primary, #10B981), var(--secondary, #0EA5A4)); transition: width .45s ease; }
+
+  /* Анимация появления вопроса */
+  @keyframes qIn{ from{opacity:0; transform: translateY(10px);} to{opacity:1; transform:none;} }
+  .q-in{ animation: qIn .28s ease both; }
+</style>
+<body>
+    <header class="header" id="header">
+      <div class="header-content">
+        <a href="nice.html#home" class="logo">
+          <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
+          Dunya Horizons
+        </a>
+        <nav>
+          <ul class="nav-menu" id="navMenu">
+            <li class="nav-item"><a href="nice.html#home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="nice.html#about" class="nav-link">About <span class="dropdown-arrow">▼</span></a>
+              <div class="dropdown">
+                <a href="nice.html#mission">Our Mission</a>
+                <a href="nice.html#team">Team</a>
+              </div>
+            </li>
+            <li class="nav-item"><a href="nice.html#programs" class="nav-link">Programs <span class="dropdown-arrow">▼</span></a>
+              <div class="dropdown">
+                <a href="nice.html#school-trips">School Trips</a>
+                <a href="nice.html#service">CAS/Service Learning</a>
+                <a href="nice.html#camps">Summer Camps</a>
+              </div>
+            </li>
+            <li class="nav-item"><a href="nice.html#students-projects" class="nav-link">Student Projects</a></li>
+            <li class="nav-item">
+                <a href="game.html" class="nav-link active">Game</a>
+            </li>
+
+          </ul>
+        </nav>
+
+        <div class="nav-item contact-menu">
+          <a href="contactus.html" class="contact-btn">Contact Us</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="container" style="padding-top: 7rem; padding-bottom: 4rem;">
+      <section class="section" id="quiz">
+        <div class="section-header" style="text-align:center;">
+          <h1 style="margin-bottom: .25rem;">Викторина</h1>
+          <p style="opacity:.8">Тема: День Победы в Азербайджане (2020).</p>
+        </div>
+
+        <div class="card" style="max-width: 1100px; margin: 0 auto;">
+          <div class="card-body">
+            <div class="quiz-top" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+              <div class="pill" id="progressPill" style="padding:.4rem .8rem; border-radius:999px; background:var(--primary, #1a73e8); color:#fff;">
+                Вопрос <span id="qIndex">1</span>/<span id="qTotal">10</span>
+              </div>
+            </div>
+            <div id="progressWrap" class="progress-wrap" aria-hidden="true">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+
+            <h2 id="questionText" style="margin:1rem 0 1rem;"></h2>
+
+            <div id="options" class="options-grid" style="display:grid; gap:.75rem;">
+              <!-- options go here -->
+            </div>
+
+            <div id="feedback" aria-live="polite" style="display:none;"></div>
+
+            <div class="quiz-actions" style="display:flex; justify-content:center; align-items:center; margin-top:1rem;">
+              <button id="restartBtn" class="btn" style="display:none;">Пройти ещё раз</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Dunya Horizons</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
+            <p style="color: rgba(255,255,255,0.7);">Experiential travel and sustainability experiences for global citizens.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Programs</h3>
+            <ul class="footer-links">
+              <li><a href="nice.html">School Trips</a></li>
+              <li><a href="nice.html">CAS/Service Learning</a></li>
+              <li><a href="nice.html">Summer Camps</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Company</h3>
+            <ul class="footer-links">
+              <li><a href="nice.html">Our Mission</a></li>
+              <li><a href="nice.html">Team</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact</h3>
+            <ul class="footer-links">
+              <li>Email: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a></li>
+              <li>Phone: <a href="tel:+994505004114">+994 (050) 500-4114</a></li>
+              <li>Address: Pushkin's Street 44</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2077 Dunya Horizons. All rights reserved. <a href="nice.html#privacy" style="color: inherit;">Privacy Policy</a> • <a href="../Nice.html#terms" style="color: inherit;">Terms of Service</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+    // burger
+    (function() {
+      const burger = document.getElementById('burger');
+      const navMenu = document.getElementById('navMenu');
+      if (burger && navMenu) {
+        burger.addEventListener('click', () => {
+          navMenu.classList.toggle('open');
+          burger.classList.toggle('open');
+          const expanded = burger.getAttribute('aria-expanded') === 'true';
+          burger.setAttribute('aria-expanded', String(!expanded));
+        });
+      }
+    })();
+
+    // Quiz data
+    const QUESTIONS = [
+      { q: 'Когда началась и до какого момента (вступления в силу перемирия) длилась активная фаза боевых действий?',
+        opts: [
+          '27.09.2020 — 10.11.2020',
+          '28.09.2020 — 10.11.2020',
+          '27.09.2020 — 09.11.2020',
+          '01.10.2020 — 01.12.2020'
+        ], correct: 0 },
+      { q: 'Сколько дней продолжался конфликт 2020 года?',
+        opts: ['43', '44', '45', '46'], correct: 1 },
+      { q: 'Какой вариант ближе всего к официально озвученным военным потерям сторон?',
+        opts: [
+          'Азербайджан ≈2 900; Армения ≈3 800',
+          'Азербайджан ≈3 200; Армения ≈2 700',
+          'Азербайджан ≈2 400; Армения ≈3 100',
+          'Азербайджан ≈2 900; Армения ≈2 900'
+        ], correct: 0 },
+      { q: 'Какой набор ключевых этапов/сражений чаще всего выделяют?',
+        opts: [
+          'Джебраил → Физули → Хадрут → Зангелан → Губадлы → Шуша',
+          'Тертер → Агдере → Аскеран → Шуша',
+          'Физули → Джебраил → Губадлы → Зангелан → Ходжавенд → Ходжалы',
+          'Зангелан → Лачин → Физули → Агдам → Кельбаджар → Шуша'
+        ], correct: 0 },
+      { q: 'Как корректнее всего описать роль России и Турции после осени 2020-го?',
+        opts: [
+          'Россия — медиатор и ~1 960 миротворцев; совместный российско-турецкий мониторинговый центр в Агдаме; Турция — политико-военная поддержка Азербайджану',
+          'Россия — 3 000 миротворцев и центр в Барде; Турция ввела миротворцев в НК',
+          'Турция — единственный миротворец; Россия — наблюдатель без мандата',
+          'Россия подписала соглашение без участия сторон; Турция закрыла своё небо для обоих'
+        ], correct: 0 },
+      { q: 'Когда и кем подписано заявление, положившее конец активной фазе?',
+        opts: [
+          '09.11.2020; Ильхам Алиев, Никол Пашинян, Владимир Путин',
+          '10.11.2020; Ильхам Алиев, Никол Пашинян, Владимир Путин',
+          '09.11.2020; Ильхам Алиев, Никол Пашинян, Реджеп Тайип Эрдоган',
+          '01.12.2020; Ильхам Алиев, Никол Пашинян, Сергей Лавров'
+        ], correct: 0 },
+      { q: 'Какой день закреплён в Азербайджане как День Победы и с чем он связан?',
+        opts: [
+          '8 ноября — связан с освобождением Шуши',
+          '10 ноября — вступление в силу перемирия',
+          '1 декабря — завершение передачи Лачина',
+          '27 сентября — начало активных боёв'
+        ], correct: 0 },
+      { q: 'Какая последовательность/даты передачи районов в соответствии с заявлением верны?',
+        opts: [
+          'Агдам — 20.11; Кельбаджар — 25.11; Лачин — 01.12',
+          'Агдам — 20.11; Кельбаджар — 15.11; Лачин — 05.12',
+          'Кельбаджар — 25.11; Лачин — 01.12; Агдам — 05.12',
+          'Агдам — 01.12; Кельбаджар — 25.11; Лачин — 20.11'
+        ], correct: 0 },
+      { q: 'Какое сочетание эффектов на региональную политическую конфигурацию наиболее корректно?',
+        opts: [
+          'Усиление роли России как посредника; рост влияния Турции; фиксация разблокировки транспортных связей (в т.ч. к Нахчывану); изменение статус-кво',
+          'Передача миссии ЕС; Турция — наблюдатель; пункты о транспорте исключены',
+          'Размещение турецких миротворцев в НК; снижение роли России; отмена коридоров',
+          'Сохранение довоенного статус-кво; отсутствие международного мониторинга; без упоминания о связях'
+        ], correct: 0 },
+      { q: 'Какая формулировка международной реакции наиболее точна?',
+        opts: [
+          'Серия призывов к прекращению огня; попытки гуманитарных перемирий в октябре (10, 17, 26) срывались до итогового заявления',
+          'Массовое признание независимости НК большинством государств',
+          'Санкции ООН против обеих сторон и ввод миротворцев ООН с правом силы',
+          'Передача миротворческой миссии ОБСЕ численностью 10 000 человек'
+        ], correct: 0 }
+    ];
+
+    const qText   = document.getElementById('questionText');
+    const options = document.getElementById('options');
+    const qIndexEl= document.getElementById('qIndex');
+    const qTotalEl= document.getElementById('qTotal');
+    const feedback= document.getElementById('feedback');
+    const restart = document.getElementById('restartBtn');
+    const progressPill = document.getElementById('progressPill');
+    const answers = Array(QUESTIONS.length).fill(null);
+    const orderMap = Array(QUESTIONS.length);
+    const progressWrap = document.getElementById('progressWrap');
+    const progressBar  = document.getElementById('progressBar');
+
+    const questionOrder = Array.from({length: QUESTIONS.length}, (_, i) => i);
+    function fisherYates(arr){
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    function shuffleQuestions(){ fisherYates(questionOrder); }
+
+    qTotalEl.textContent = QUESTIONS.length;
+
+    let idx = 0;
+    let right = 0;
+    let wrong = 0;
+    let locked = false;
+
+
+    function updateProgress(){
+      if (!progressBar) return;
+      const pct = (idx / QUESTIONS.length) * 100;
+      progressBar.style.width = pct + '%';
+    }
+
+    function renderQuestion() {
+      locked = false;
+      feedback.textContent = '';
+      const qi = questionOrder[idx];
+      const q  = QUESTIONS[qi];
+      if (progressPill) progressPill.style.display = 'inline-flex';
+      if (progressWrap) progressWrap.style.display = 'block';
+      qIndexEl.textContent = String(idx + 1);
+      qText.textContent = q.q;
+      options.innerHTML = '';
+
+      // shuffle options per question, keep mapping to original indices
+      const order = Array.from({length: q.opts.length}, (_, i) => i);
+      fisherYates(order);
+      orderMap[qi] = order;
+      order.forEach((origIndex, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn option';
+        btn.type = 'button';
+        btn.textContent = String.fromCharCode(65 + i) + ') ' + q.opts[origIndex];
+        btn.addEventListener('click', () => handleAnswer(origIndex));
+        options.appendChild(btn);
+      });
+
+      // плавная анимация появления вопроса и опций
+      qText.classList.remove('q-in');
+      options.classList.remove('q-in');
+      void qText.offsetWidth; void options.offsetWidth; // reflow для перезапуска анимации
+      qText.classList.add('q-in');
+      options.classList.add('q-in');
+
+      // обновляем прогресс-бар
+      updateProgress();
+    }
+
+    function handleAnswer(choice) {
+      if (locked) return;
+      locked = true;
+      const qi = questionOrder[idx];
+      const q  = QUESTIONS[qi];
+      const isCorrect = choice === q.correct;
+      answers[qi] = choice;
+      if (isCorrect) { right++; } else { wrong++; }
+
+      // disable options without revealing correctness
+      const btns = options.querySelectorAll('button.option');
+      btns.forEach((b) => { b.disabled = true; });
+
+      if (idx < QUESTIONS.length - 1) {
+        setTimeout(nextQuestion, 900);
+      } else {
+        setTimeout(showResult, 900);
+      }
+    }
+
+    function nextQuestion() {
+      if (idx < QUESTIONS.length - 1) {
+        idx++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const total = QUESTIONS.length;
+      const percent = Math.round((right / total) * 100);
+
+      // Заголовок и контейнер
+      qText.textContent = 'Результат';
+      options.innerHTML = '';
+      feedback.innerHTML = '';
+      if (progressPill) progressPill.style.display = 'none';
+      if (progressWrap) progressWrap.style.display = 'none';
+      restart.style.display = 'inline-flex';
+
+      // Разметка результата с кругом
+      const R = 80;                               // радиус круга
+      const CIRC = 2 * Math.PI * R;               // длина окружности
+      const ratio = right / total;
+      const offset = CIRC * (1 - ratio);
+
+      const result = document.createElement('div');
+      result.className = 'result-wrap';
+      result.innerHTML = `
+        <div class="ring" aria-label="Итог: ${right} из ${total}">
+          <svg viewBox="0 0 200 200" role="img">
+            <circle class="ring-bg" cx="100" cy="100" r="${R}"></circle>
+            <circle id="ringProgress" class="ring-progress"
+                    cx="100" cy="100" r="${R}"
+                    stroke-dasharray="${CIRC}" stroke-dashoffset="${CIRC}"></circle>
+          </svg>
+          <div class="ring-label">
+            <div class="ring-score"><span id="scoreNumber">${right}</span>/<span id="scoreTotal">${total}</span></div>
+            <div class="ring-percent"><span id="scorePercent">${percent}%</span></div>
+          </div>
+        </div>
+        <div class="result-stats">
+          <p><strong>Правильных:</strong> ${right}</p>
+          <p><strong>Неверных:</strong> ${wrong}</p>
+        </div>
+      `;
+      options.appendChild(result);
+
+      // Список обзора всех ответов
+      const review = document.createElement('div');
+      review.className = 'review-list';
+      const letter = (n) => String.fromCharCode(65 + n);
+      QUESTIONS.forEach((qq, i) => {
+        const chosen = answers[i];
+        const correct = qq.correct;
+        const isOk = chosen === correct;
+        const item = document.createElement('div');
+        item.className = 'review-item ' + (isOk ? 'is-correct' : 'is-wrong');
+        const chosenText = chosen != null ? `${letter(chosen)}) ${qq.opts[chosen]}` : '—';
+        const correctText = `${letter(correct)}) ${qq.opts[correct]}`;
+        item.innerHTML = `
+          <div class="review-q"><span class="badge">${i+1}</span> ${qq.q}</div>
+          <div class="review-a">
+            <div class="chip ${isOk ? 'correct' : 'wrong'} chosen">Вы выбрали: ${chosenText}</div>
+            <div class="chip correct">Правильный: ${correctText}</div>
+          </div>
+        `;
+        review.appendChild(item);
+      });
+      options.appendChild(review);
+
+      // Плавное заполнение круга
+      requestAnimationFrame(() => {
+        const ring = document.getElementById('ringProgress');
+        ring.style.strokeDashoffset = String(offset);
+      });
+    }
+
+    restart.addEventListener('click', () => {
+      idx = 0; right = 0; wrong = 0;
+      restart.style.display = 'none';
+      if (progressPill) progressPill.style.display = 'inline-flex';
+      if (progressWrap) { progressWrap.style.display = 'block'; }
+      if (progressBar)  { progressBar.style.width = '0%'; }
+      shuffleQuestions();
+      renderQuestion();
+    });
+
+    // init
+    shuffleQuestions();
+    renderQuestion();
+    </script>
+</body>
+</html>
