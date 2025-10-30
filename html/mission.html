@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission - Dunya Horizons</title>
+    <meta name="description" content="Discover the mission of Dunya Horizons — a student-led initiative from Dunya School that connects education, sustainability, and global citizenship.">
+    <link rel="stylesheet" href="css/nice.css">
+    <link rel="icon" type="image/png" href="img/horizon.png">
+    <style>
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--body);
+        }
+
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--heading);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .contact-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--secondary);
+        }
+
+        .mission-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .mission-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .mission-section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mission-section h2 {
+            color: var(--heading);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-section p {
+            color: var(--body);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .goal-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .goal-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .goal-card h3 {
+            color: var(--heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-card p {
+            color: var(--body);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: var(--heading);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="Nice.html#home" class="logo">
+                <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
+                Dunya Horizons
+            </a>            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="Nice.html#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="mission.html" class="nav-link active">
+                            About
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="mission.html">Our Mission</a>
+                            <a href="team.html">Team</a>
+    
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Nice.html#programs" class="nav-link">
+                            Programs
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="trips.html">School Trips</a>
+                            <a href="cas.html">CAS/Service Learning</a>
+                            <a href="camps.html">Summer Camps</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Nice.html#blog" class="nav-link">Students Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link">Game</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a href="Nice.html#blog" class="nav-link">
+                            Blog
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="Nice.html#field-notes"></a>
+                            <a href="Nice.html#sustainability-blog">Sustainability</a>
+                            <a href="Nice.html#students">Student Stories</a>
+                            <a href="Nice.html#tips">Tips & Guides</a>
+                        </div>
+                    </li> -->
+                </ul>
+            </nav>
+
+            <div class="nav-item contact-menu">
+                <a href="contactus.html" class="contact-btn">
+                    Contact Us
+                </a>
+            </div>
+
+            <button class="burger" id="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+    <!-- Hero -->
+    <section class="mission-hero">
+        <h1>Our Mission</h1>
+        <p>
+            To inspire young minds to think globally, act sustainably, and learn through exploration.  
+            Dunya Horizons is not just a project — it’s a vision of the future shaped by students.
+        </p>
+    </section>
+
+    <!-- Mission Details -->
+    <section class="mission-section">
+        <h2>About Dunya School</h2>
+        <p>
+            Dunya School in Baku is more than a place to study — it’s a space for innovation, creativity, and global connection.  
+            We learn to think beyond textbooks and use our knowledge to make a real difference in the world.
+        </p>
+
+        <h2>Our Project: Dunya Horizons</h2>
+        <p>
+            This initiative was born from students’ curiosity and drive to solve real-world challenges.  
+            Through Dunya Horizons, we explore environmental issues like the drying of the Caspian Sea,  
+            use technology such as satellites and data analysis, and design creative solutions for sustainability.  
+            Our goal is to bridge science, action, and awareness — one idea at a time.
+        </p>
+
+        <h2>Our Core Goals</h2>
+        <div class="goals-grid">
+            <div class="goal-card">
+                <div class="goal-icon">🌍</div>
+                <h3>Global Awareness</h3>
+                <p>We aim to understand how local actions connect to global challenges and encourage others to think internationally.</p>
+            </div>
+            <div class="goal-card">
+                <div class="goal-icon">💡</div>
+                <h3>Innovation Through Learning</h3>
+                <p>Combining science, creativity, and critical thinking to develop meaningful solutions for our planet’s future.</p>
+            </div>
+            <div class="goal-card">
+                <div class="goal-icon">🤝</div>
+                <h3>Community & Collaboration</h3>
+                <p>Working together as students and teachers to create a culture of respect, responsibility, and shared growth.</p>
+            </div>
+            <div class="goal-card">
+                <div class="goal-icon">🌱</div>
+                <h3>Sustainability in Action</h3>
+                <p>Turning ideas into impact — from environmental awareness to real-life school projects that promote green living.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+     <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dunya Horizons</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Educational travel and sustainability experiences for global citizens.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="trips.html">School Trips</a></li>
+                        <li><a href="cas.html">CAS/Service Learning</a></li>
+                        <li><a href="camps.html">Summer Camps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Our Mission</a></li>
+                        <li><a href="team.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacts us!</h3>
+                    <ul class="footer-links">
+                        <li>Emails: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a>
+                        <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
+                        <li>Phones: <br><a href="tel:+9940505004114">+994 (050) 500-4114    <br> </a>
+                        <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
+                        <li>Address: Pushkin's Street 44</li>
+                        <li>Address: Reshad's Street 45</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2077 Dunya Horizons. All rights reserved. | <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> | <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile Menu Toggle
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link && link.querySelector('.dropdown-arrow')) {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('mobile-open');
+                    }
+                });
+            }
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+
+            link.classList.remove('active');
+            if (href === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+        let hasAnimated = false;
+
+        const animateCounters = () => {
+            if (hasAnimated) return;
+            
+            const counterSection = document.getElementById('impact');
+            const rect = counterSection.getBoundingClientRect();
+            
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                hasAnimated = true;
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const increment = target / speed;
+                    
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + increment);
+                            setTimeout(updateCount, 10);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+        };
+
+        window.addEventListener('scroll', animateCounters);
+
+        // Form submission (AJAX + automatic fallback)
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const replytoHidden = contactForm.querySelector('input[name="_replyto"]');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // honeypot check
+            if (contactForm.honeypot.value) return;
+
+            // Basic validation
+            const name = contactForm.name.value.trim();
+            const email = contactForm.email.value.trim();
+            const school = contactForm.school.value.trim();
+            const country = contactForm.country.value.trim();
+            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (!name || !emailOk || !school || !country) {
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+                formMessage.textContent = 'Please complete all required fields correctly (Full Name, Email, School/Organization, Country).';
+                return;
+            }
+
+            // UI state
+            submitBtn.disabled = true;
+            formMessage.className = 'form-message';
+            formMessage.style.display = 'block';
+            formMessage.setAttribute('role', 'status');
+            formMessage.setAttribute('aria-live', 'polite');
+            formMessage.textContent = 'Sending...';
+
+            const payload = {
+                name,
+                email,
+                organization: school,
+                country,
+                program: contactForm.program.value || '',
+                message: contactForm.message.value.trim(),
+                _subject: 'Plan Your Journey Inquiry',
+                _template: 'table',
+                _captcha: 'false',
+                _from: 'chaos.net2000@gmail.com',
+                _replyto: email
+            };
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/chaos.net2000@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error('Send error');
+
+                formMessage.className = 'form-message success';
+                formMessage.textContent = 'Thank you! We have received your message and will contact you soon.';
+                contactForm.reset();
+            } catch (error) {
+                // Fallback to standard POST if AJAX fails
+                formMessage.className = 'form-message';
+                formMessage.textContent = 'Connection is unstable. Switching to standard submission...';
+                if (replytoHidden) replytoHidden.value = email;
+                HTMLFormElement.prototype.submit.call(contactForm);
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Keyboard navigation for dropdowns
+        document.querySelectorAll('.dropdown a').forEach(link => {
+            link.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    link.closest('.nav-item').querySelector('.nav-link').focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

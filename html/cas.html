@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAS & Service Learning - Dunya Horizons</title>
+    <meta name="description" content="Discover impactful CAS and service learning journeys that connect students with meaningful community projects across the globe.">
+    <link rel="stylesheet" href="css/nice.css">
+    <link rel="icon" type="image/png" href="img/horizon.png">
+    <style>
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--body);
+        }
+
+        .cas-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.92), rgba(14, 165, 164, 0.92));
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .cas-hero h1 {
+            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            margin-bottom: 1rem;
+        }
+
+        .cas-hero p {
+            font-size: 1.15rem;
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .cas-hero .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .cas-section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 4.5rem 2rem;
+        }
+
+        .cas-section h2 {
+            color: var(--heading);
+            text-align: center;
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            margin-bottom: 1rem;
+        }
+
+        .cas-section p.section-lead {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 3rem;
+            color: var(--body);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .pillar-card {
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            padding: 2.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+        }
+
+        .pillar-card h3 {
+            color: var(--heading);
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 1.8rem;
+        }
+
+        .experience-card h4 {
+            margin-top: 0;
+            color: var(--heading);
+        }
+
+        .experience-card ul {
+            padding-left: 1.2rem;
+            margin: 1rem 0 0;
+        }
+
+        .cas-timeline {
+            margin-top: 3rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .timeline-step {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 1.8rem;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .timeline-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h3 {
+            margin: 0 0 0.5rem;
+            color: var(--heading);
+        }
+
+        .impact-highlight {
+            background: linear-gradient(135deg, rgba(0, 190, 160, 0.12), rgba(0, 132, 240, 0.12));
+            border-radius: 22px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3.5rem;
+        }
+
+        .impact-highlight h3 {
+            color: var(--heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .impact-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.8rem;
+            width: min(220px, 100%);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .timeline-number {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="Nice.html#home" class="logo">
+                <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
+                Dunya Horizons
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="Nice.html#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="mission.html" class="nav-link">
+                            About
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="mission.html">Our Mission</a>
+                            <a href="team.html">Team</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cas.html" class="nav-link active">
+                            Programs
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="trips.html">School Trips</a>
+                            <a href="cas.html" class="active">CAS/Service Learning</a>
+                            <a href="camps.html">Summer Camps</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Nice.html#blog" class="nav-link">Students Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link">Game</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="nav-item contact-menu">
+                <a href="contactus.html" class="contact-btn">
+                    Contact Us
+                </a>
+            </div>
+
+            <button class="burger" id="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="cas-hero" id="hero">
+        <h1>Purposeful Service & CAS Journeys</h1>
+        <p>Empower students to lead with empathy, design thoughtful actions, and reflect on their global impact through immersive CAS and service learning experiences.</p>
+        <div class="cta-group">
+            <a href="contactus.html" class="btn-primary">Plan a Project</a>
+            <a href="#pillars" class="btn-ghost">See Program Pillars</a>
+        </div>
+    </section>
+
+    <section class="cas-section" id="overview">
+        <h2>Designed for Deep Learning</h2>
+        <p class="section-lead">Every CAS journey we design balances Creativity, Activity, and Service with meaningful reflection. Schools partner with us to create projects that improve communities while strengthening student agency.</p>
+        <div class="pillars-grid" id="pillars">
+            <div class="pillar-card">
+                <div class="pillar-icon">🎨</div>
+                <h3>Creativity</h3>
+                <p>Students prototype solutions, design awareness campaigns, and explore artistic storytelling that amplifies community voices.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🏃</div>
+                <h3>Activity</h3>
+                <p>Action-oriented field days, eco-restoration efforts, and inclusive sports programming keep bodies active while making a difference.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🤝</div>
+                <h3>Service</h3>
+                <p>Long-term partnerships with local NGOs ensure projects respond to real needs and leave a lasting, positive footprint.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cas-section" id="experiences">
+        <h2>Signature Experiences</h2>
+        <p class="section-lead">We curate CAS pathways that connect curriculum standards with on-the-ground impact. Each experience is supported by facilitators and reflection guides.</p>
+        <div class="experience-grid">
+            <div class="experience-card">
+                <h4>Coastal Restoration Lab</h4>
+                <p>Protect fragile marine ecosystems while documenting biodiversity change.</p>
+                <ul>
+                    <li>Water quality monitoring masterclass</li>
+                    <li>Community workshops for sustainable fishing</li>
+                    <li>Student-led policy recommendations</li>
+                </ul>
+            </div>
+            <div class="experience-card">
+                <h4>Inclusive Communities Studio</h4>
+                <p>Design accessible urban spaces and inclusive events alongside local partners.</p>
+                <ul>
+                    <li>Empathy mapping with residents</li>
+                    <li>Digital prototypes and inclusive design sprints</li>
+                    <li>Mini-grants for pilot projects</li>
+                </ul>
+            </div>
+            <div class="experience-card">
+                <h4>Green Innovation Challenge</h4>
+                <p>Launch sustainability start-up ideas guided by mentors from the Dunya network.</p>
+                <ul>
+                    <li>Impact entrepreneurship bootcamp</li>
+                    <li>Pitch showcase with international judges</li>
+                    <li>12-week mentorship & reflection journal</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cas-timeline">
+            <div class="timeline-step">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3>Co-Design</h3>
+                    <p>We align project goals with IB learner outcomes and local community priorities.</p>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3>Immersion</h3>
+                    <p>Students lead service actions in-country, supported by educators and specialists.</p>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3>Reflection</h3>
+                    <p>Guided journaling, storytelling labs, and impact audits ensure deep learning.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="impact-highlight">
+            <h3>2024 Impact Snapshot</h3>
+            <p>Together with partner schools, Dunya Horizons students dedicated thousands of hours to projects that uplift communities across the Caspian region.</p>
+            <div class="impact-metrics">
+                <div class="metric">
+                    <strong>2,400+</strong>
+                    Service hours completed
+                </div>
+                <div class="metric">
+                    <strong>18</strong>
+                    Active community partners
+                </div>
+                <div class="metric">
+                    <strong>92%</strong>
+                    Students reporting higher empathy
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dunya Horizons</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Educational travel and sustainability experiences for global citizens.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="trips.html">School Trips</a></li>
+                        <li><a href="cas.html">CAS/Service Learning</a></li>
+                        <li><a href="camps.html">Summer Camps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Our Mission</a></li>
+                        <li><a href="team.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Emails: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a>,
+                            <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
+                        <li>Phones:<br><a href="tel:+9940505004114">+994 (050) 500-4114</a><br>
+                            <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
+                        <li>Address: Pushkin's Street 44</li>
+                        <li>Address: Reshad's Street 45</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2077 Dunya Horizons. All rights reserved. | <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> | <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link && link.querySelector('.dropdown-arrow')) {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('mobile-open');
+                    }
+                });
+            }
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href')?.startsWith('#')) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

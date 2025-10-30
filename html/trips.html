@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Trips - Dunya Horizons</title>
+    <meta name="description" content="Curriculum-aligned school trips that combine global exploration with real-world learning opportunities.">
+    <link rel="stylesheet" href="css/nice.css">
+    <link rel="icon" type="image/png" href="img/horizon.png">
+    <style>
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--body);
+        }
+
+        .trips-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.92), rgba(14, 165, 164, 0.92));
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .trips-hero h1 {
+            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            margin-bottom: 1rem;
+        }
+
+        .trips-hero p {
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .trips-hero .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .trips-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4.5rem 2rem;
+        }
+
+        .trips-section h2 {
+            text-align: center;
+            color: var(--heading);
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            margin-bottom: 1rem;
+        }
+
+        .trips-section p.section-lead {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            color: var(--body);
+            line-height: 1.7;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .destination-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+        }
+
+        .destination-card h3 {
+            margin-top: 0;
+            color: var(--heading);
+        }
+
+        .destination-card ul {
+            padding-left: 1.2rem;
+            margin: 1rem 0 0;
+        }
+
+        .experience-highlight {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 14px 38px rgba(0, 0, 0, 0.08);
+            margin-top: 3rem;
+        }
+
+        .experience-highlight h3 {
+            margin-top: 0;
+            color: var(--heading);
+        }
+
+        .itinerary-timeline {
+            margin-top: 3.5rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .itinerary-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-left: 4px solid var(--secondary);
+            border-radius: 14px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .itinerary-card h4 {
+            margin: 0 0 0.5rem;
+            color: var(--heading);
+        }
+
+        .trip-metrics {
+            margin-top: 3.5rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(14, 165, 164, 0.12));
+            border-radius: 22px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .trip-metrics h3 {
+            color: var(--heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .metrics-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.8rem;
+            width: min(220px, 100%);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .experience-highlight {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="Nice.html#home" class="logo">
+                <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
+                Dunya Horizons
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="Nice.html#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="mission.html" class="nav-link">
+                            About
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="mission.html">Our Mission</a>
+                            <a href="team.html">Team</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="trips.html" class="nav-link active">
+                            Programs
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="trips.html" class="active">School Trips</a>
+                            <a href="cas.html">CAS/Service Learning</a>
+                            <a href="camps.html">Summer Camps</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Nice.html#blog" class="nav-link">Students Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link">Game</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="nav-item contact-menu">
+                <a href="contactus.html" class="contact-btn">
+                    Contact Us
+                </a>
+            </div>
+
+            <button class="burger" id="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="trips-hero" id="hero">
+        <h1>Transformative School Trips</h1>
+        <p>Bring classroom concepts to life through experiential journeys that spark curiosity, global citizenship, and lifelong connections.</p>
+        <div class="cta-group">
+            <a href="contactus.html" class="btn-primary">Start Planning</a>
+            <a href="#destinations" class="btn-ghost">Explore Routes</a>
+        </div>
+    </section>
+
+    <section class="trips-section" id="destinations">
+        <h2>Where Learning Comes Alive</h2>
+        <p class="section-lead">Each itinerary blends academic goals, cultural immersion, and sustainable travel practices. Customize any destination to fit your subject focus and student age group.</p>
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <h3>Caspian Coast Ecology</h3>
+                <p>Investigate coastal ecosystems and climate resilience in Azerbaijan.</p>
+                <ul>
+                    <li>Field labs with marine researchers</li>
+                    <li>Sea level change simulations</li>
+                    <li>Community-led conservation projects</li>
+                </ul>
+            </div>
+            <div class="destination-card">
+                <h3>Silk Road Heritage</h3>
+                <p>Trace ancient trade routes across the Caucasus and learn from local artisans.</p>
+                <ul>
+                    <li>Hands-on archaeology workshops</li>
+                    <li>Language exchanges and homestays</li>
+                    <li>Design thinking challenge on cultural preservation</li>
+                </ul>
+            </div>
+            <div class="destination-card">
+                <h3>Future Cities Lab</h3>
+                <p>Examine smart city innovation and urban sustainability in global hubs.</p>
+                <ul>
+                    <li>STEM challenges with local startups</li>
+                    <li>Policy debates in city council chambers</li>
+                    <li>Student pitch session for greener neighbourhoods</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="experience-highlight">
+            <h3>Why Schools Choose Dunya Horizons</h3>
+            <p>Our team balances inspiring exploration with comprehensive safety planning. We collaborate with educators to align pre-trip lessons, on-site experiences, and post-trip reflection artifacts.</p>
+        </div>
+
+        <div class="itinerary-timeline">
+            <div class="itinerary-card">
+                <h4>Pre-Trip Orientation</h4>
+                <p>Interactive workshops build cultural competence, travel confidence, and trip-specific research skills.</p>
+            </div>
+            <div class="itinerary-card">
+                <h4>Immersive Field Days</h4>
+                <p>Experiential learning labs, expert talks, and student-led investigations fuel every day in the field.</p>
+            </div>
+            <div class="itinerary-card">
+                <h4>Reflection & Exhibition</h4>
+                <p>Students synthesize their discoveries through multimedia storytelling and community events.</p>
+            </div>
+        </div>
+
+        <div class="trip-metrics">
+            <h3>Trusted Outcomes</h3>
+            <p>Our educator partners see measurable growth in student collaboration, empathy, and global awareness.</p>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <strong>15+</strong>
+                    Destinations across 6 countries
+                </div>
+                <div class="metric">
+                    <strong>98%</strong>
+                    Teachers recommending our trips
+                </div>
+                <div class="metric">
+                    <strong>4.8/5</strong>
+                    Average student reflection score
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dunya Horizons</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Educational travel and sustainability experiences for global citizens.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="trips.html">School Trips</a></li>
+                        <li><a href="cas.html">CAS/Service Learning</a></li>
+                        <li><a href="camps.html">Summer Camps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Our Mission</a></li>
+                        <li><a href="team.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Emails: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a>,
+                            <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
+                        <li>Phones:<br><a href="tel:+9940505004114">+994 (050) 500-4114</a><br>
+                            <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
+                        <li>Address: Pushkin's Street 44</li>
+                        <li>Address: Reshad's Street 45</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2077 Dunya Horizons. All rights reserved. | <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> | <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link && link.querySelector('.dropdown-arrow')) {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('mobile-open');
+                    }
+                });
+            }
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href')?.startsWith('#')) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

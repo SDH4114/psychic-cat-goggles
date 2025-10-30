@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Camps - Dunya Horizons</title>
+    <meta name="description" content="Adventure-filled summer camps that grow leadership, environmental stewardship, and global friendships.">
+    <link rel="stylesheet" href="css/nice.css">
+    <link rel="icon" type="image/png" href="img/horizon.png">
+    <style>
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--body);
+        }
+
+        .camps-hero {
+            background: linear-gradient(135deg, rgba(0, 190, 160, 0.92), rgba(255, 180, 0, 0.9));
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .camps-hero h1 {
+            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            margin-bottom: 1rem;
+        }
+
+        .camps-hero p {
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .camps-hero .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .camps-section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 4.5rem 2rem;
+        }
+
+        .camps-section h2 {
+            text-align: center;
+            color: var(--heading);
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            margin-bottom: 1rem;
+        }
+
+        .camps-section p.section-lead {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 3rem;
+            color: var(--body);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .camp-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .camp-card {
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .camp-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+        }
+
+        .camp-card h3 {
+            margin-top: 0;
+            color: var(--heading);
+        }
+
+        .camp-card p {
+            margin-bottom: 0;
+        }
+
+        .camp-programs {
+            margin-top: 3.5rem;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .program-block {
+            background: rgba(255, 255, 255, 0.92);
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .program-block h3 {
+            margin-top: 0;
+            color: var(--heading);
+        }
+
+        .program-block ul {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0 0;
+        }
+
+        .camp-schedule {
+            margin-top: 3.5rem;
+            background: linear-gradient(135deg, rgba(255, 180, 0, 0.14), rgba(0, 190, 160, 0.14));
+            border-radius: 22px;
+            padding: 3rem 2rem;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .schedule-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+        }
+
+        .schedule-card h4 {
+            margin: 0 0 0.5rem;
+            color: var(--heading);
+        }
+
+        .camp-cta-panel {
+            margin-top: 3.5rem;
+            background: var(--heading);
+            color: var(--white);
+            border-radius: 22px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .camp-cta-panel h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .camp-cta-panel p {
+            max-width: 680px;
+            margin: 0 auto 1.5rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        @media (max-width: 768px) {
+            .camp-cta-panel {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="Nice.html#home" class="logo">
+                <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
+                Dunya Horizons
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="Nice.html#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="mission.html" class="nav-link">
+                            About
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="mission.html">Our Mission</a>
+                            <a href="team.html">Team</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="camps.html" class="nav-link active">
+                            Programs
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="trips.html">School Trips</a>
+                            <a href="cas.html">CAS/Service Learning</a>
+                            <a href="camps.html" class="active">Summer Camps</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Nice.html#blog" class="nav-link">Students Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link">Game</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="nav-item contact-menu">
+                <a href="contactus.html" class="contact-btn">
+                    Contact Us
+                </a>
+            </div>
+
+            <button class="burger" id="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="camps-hero" id="hero">
+        <h1>Summer Camps with Purpose</h1>
+        <p>Give students a season of discovery with camps that blend outdoor adventure, STEM creativity, and global citizenship in unforgettable locations.</p>
+        <div class="cta-group">
+            <a href="contactus.html" class="btn-primary">Reserve a Spot</a>
+            <a href="#pillars" class="btn-ghost">Why Families Love Us</a>
+        </div>
+    </section>
+
+    <section class="camps-section" id="pillars">
+        <h2>Signature Camp Pillars</h2>
+        <p class="section-lead">Our programmes are led by experienced facilitators, safety-certified guides, and student mentors who ensure every camper feels included and inspired.</p>
+        <div class="camp-pillars">
+            <div class="camp-card">
+                <h3>Adventure & Wellness</h3>
+                <p>Daily hikes, water sports, and team building challenges nurture resilience and healthy habits.</p>
+            </div>
+            <div class="camp-card">
+                <h3>Innovation Lab</h3>
+                <p>Hands-on STEM studios encourage campers to experiment, prototype, and solve problems creatively.</p>
+            </div>
+            <div class="camp-card">
+                <h3>Earth Guardians</h3>
+                <p>Eco-action projects teach practical sustainability, from zero-waste kitchens to biodiversity surveys.</p>
+            </div>
+            <div class="camp-card">
+                <h3>Global Community</h3>
+                <p>Leadership circles, cultural nights, and service workshops build empathy across cultures.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="camps-section" id="programs">
+        <h2>Choose Your Camp Experience</h2>
+        <p class="section-lead">Select one of our core camp tracks or mix and match sessions to craft a personalised summer pathway for your students.</p>
+        <div class="camp-programs">
+            <div class="program-block">
+                <h3>Explorer Week (Ages 10-13)</h3>
+                <p>Perfect for first-time campers discovering the outdoors and collaborative learning.</p>
+                <ul>
+                    <li>Nature quests and wildlife tracking</li>
+                    <li>Creative maker labs with recycled materials</li>
+                    <li>Evening campfires focused on storytelling and reflection</li>
+                </ul>
+            </div>
+            <div class="program-block">
+                <h3>Impact Innovators (Ages 13-16)</h3>
+                <p>Dive into social entrepreneurship, design challenges, and purpose-driven teamwork.</p>
+                <ul>
+                    <li>Mentored design sprints on sustainability themes</li>
+                    <li>Community impact project with local partners</li>
+                    <li>Leadership coaching and peer feedback sessions</li>
+                </ul>
+            </div>
+            <div class="program-block">
+                <h3>Leaders in Action (Ages 16-18)</h3>
+                <p>An intensive camp for aspiring changemakers ready to lead expeditions and service projects.</p>
+                <ul>
+                    <li>Backcountry expeditions with safety-certified guides</li>
+                    <li>Advanced first-aid and facilitation workshops</li>
+                    <li>Capstone presentations for parents and school mentors</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="camp-schedule" id="schedule">
+            <h2 style="text-align: center; color: var(--heading); margin-top: 0;">Sample Daily Flow</h2>
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <h4>Morning Momentum</h4>
+                    <p>Sunrise energisers, mindful check-ins, and skill-building rotations to kick start the day.</p>
+                </div>
+                <div class="schedule-card">
+                    <h4>Afternoon Adventures</h4>
+                    <p>Themed expeditions, collaborative quests, and project labs guided by expert mentors.</p>
+                </div>
+                <div class="schedule-card">
+                    <h4>Evening Circles</h4>
+                    <p>Community dinners, cultural exchanges, and reflection journals under the stars.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="camp-cta-panel">
+            <h3>Ready to Co-Design Your Camp?</h3>
+            <p>We tailor sessions, travel logistics, and safety planning alongside schools and families. Tell us about your campers and we will build an unforgettable summer together.</p>
+            <a href="contactus.html" class="btn-primary">Talk With Our Team</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dunya Horizons</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Educational travel and sustainability experiences for global citizens.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="trips.html">School Trips</a></li>
+                        <li><a href="cas.html">CAS/Service Learning</a></li>
+                        <li><a href="camps.html">Summer Camps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Our Mission</a></li>
+                        <li><a href="team.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Emails: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a>,
+                            <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
+                        <li>Phones:<br><a href="tel:+9940505004114">+994 (050) 500-4114</a><br>
+                            <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
+                        <li>Address: Pushkin's Street 44</li>
+                        <li>Address: Reshad's Street 45</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2077 Dunya Horizons. All rights reserved. | <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> | <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link && link.querySelector('.dropdown-arrow')) {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('mobile-open');
+                    }
+                });
+            }
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href')?.startsWith('#')) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
