@@ -1,128 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Delicious Recipes</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #fffaf5;
-    }
-    .recipes {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin: 20px;
-    }
-    .card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 15px;
-      width: 300px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Flavors - Dunya Horizons</title>
+    <meta name="description" content="A curated collection of comforting recipes enjoyed across our journeys and community tables.">
+    <link rel="stylesheet" href="css/nice.css">
+    <link rel="icon" type="image/png" href="img/horizon.png">
+    <style>
+        body {
+            background: var(--bg);
+            color: var(--body);
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .nav-actions .back-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 0.65rem 1.6rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .nav-actions .back-btn:hover,
+        .nav-actions .back-btn:focus {
+            background: var(--primary);
+            color: var(--white);
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        .culinary-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.92), rgba(14, 165, 164, 0.92));
+            color: var(--white);
+            text-align: center;
+            padding: clamp(6rem, 12vw, 8.5rem) 1.75rem;
+            margin-top: 92px;
+        }
+
+        .culinary-hero h1 {
+            font-size: clamp(2.4rem, 4vw, 3.25rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .culinary-hero p {
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .recipes-section {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: clamp(3.5rem, 9vw, 5rem) 1.75rem 5rem;
+        }
+
+        .recipes-section .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .recipes-section .section-header p {
+            max-width: 720px;
+            margin: 1rem auto 0;
+            font-size: 1.1rem;
+            color: var(--body);
+        }
+
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .recipe-card {
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+        }
+
+        .recipe-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .recipe-content {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .recipe-content h3 {
+            margin: 0;
+            font-size: 1.45rem;
+            color: var(--heading);
+        }
+
+        .recipe-content p {
+            margin: 0;
+            color: var(--body);
+            font-size: 0.98rem;
+            line-height: 1.65;
+        }
+
+        .recipe-steps {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--body);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .recipe-steps li + li {
+            margin-top: 0.4rem;
+        }
+
+        .recipes-footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--body);
+        }
+
+        @media (max-width: 992px) {
+            .nav-actions {
+                display: none;
+            }
+
+            .culinary-hero {
+                margin-top: 84px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .recipe-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Delicious Recipes</h1>
-  <p>Welcome to our site with simple and tasty recipes!</p>
-  <div class="recipes">
-    <div class="card">
-      <h2>🥗 Olivier Salad</h2>
-      <img src="img/olivie.jpg" alt="Olivier Salad">
-      <p>A classic salad with potatoes, carrots, eggs, and sausage.</p>
-      <ul>
-        <li>Boil potatoes, carrots, and eggs.</li>
-        <li>Dice vegetables, sausage, and pickles.</li>
-        <li>Add peas and mayonnaise, then mix well.</li>
-      </ul>
-    </div>
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="Nice.html#home" class="logo">
+                <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
+                Dunya Horizons
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="Nice.html#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="mission.html" class="nav-link">
+                            About
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="mission.html">Our Mission</a>
+                            <a href="team.html">Team</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="trips.html" class="nav-link">
+                            Programs
+                            <span class="dropdown-arrow">▼</span>
+                        </a>
+                        <div class="dropdown">
+                            <a href="trips.html">School Trips</a>
+                            <a href="cas.html">CAS/Service Learning</a>
+                            <a href="camps.html">Summer Camps</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Nice.html#blog" class="nav-link">Students Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link">Game</a>
+                    </li>
+                </ul>
+            </nav>
 
-    <div class="card">
-      <h2>🍝 Pasta Bolognese</h2>
-      <img src="img/pasta.jpg" alt="Pasta Bolognese">
-      <p>Italian pasta with aromatic meat sauce.</p>
-      <ul>
-        <li>Fry minced meat with onion and garlic.</li>
-        <li>Add tomato sauce and simmer for 20 minutes.</li>
-        <li>Cook pasta and mix with the sauce.</li>
-      </ul>
-    </div>
+            <div class="nav-actions">
+                <a href="contactus.html" class="contact-btn">
+                    Contact Us
+                </a>
+            </div>
 
-    <div class="card">
-      <h2>🍰 Chocolate Cake</h2>
-      <img src="img/cake.jpg" alt="Chocolate Cake">
-      <p>A tender cake with rich chocolate flavor.</p>
-      <ul>
-        <li>Mix flour, cocoa, sugar, and eggs.</li>
-        <li>Add milk and vegetable oil.</li>
-        <li>Bake for 40 minutes at 180°C, decorate with glaze.</li>
-      </ul>
-    </div>
+            <button class="burger" id="burger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
-    <div class="card">
-      <h2>🍲 Borscht</h2>
-      <img src="img/borsh.jpg" alt="Borscht">
-      <p>Traditional Ukrainian soup with cabbage, beets, and meat.</p>
-      <ul>
-        <li>Boil meat, add chopped potatoes.</li>
-        <li>Fry beets, carrots, and onions, add to the soup.</li>
-        <li>Salt, season, and serve with sour cream.</li>
-      </ul>
-    </div>
+    <main>
+        <section class="culinary-hero" id="hero">
+            <h1>Global Flavors From Our Journey</h1>
+            <p>Gathered from homestays, community kitchens, and student-led cooking nights, these comforting dishes celebrate the people and places we explore together.</p>
+        </section>
 
-    <div class="card">
-      <h2>🍕 Margherita Pizza</h2>
-      <img src="img/pizza.jpg" alt="Margherita Pizza">
-      <p>Classic Italian pizza with tomatoes, cheese, and basil.</p>
-      <ul>
-        <li>Roll out dough and spread tomato sauce.</li>
-        <li>Add mozzarella cheese and basil leaves.</li>
-        <li>Bake for 15 minutes at 220°C.</li>
-      </ul>
-    </div>
+        <section class="recipes-section" id="recipes">
+            <div class="section-header">
+                <h2>Comfort Kitchen Collection</h2>
+                <p>Save these easy-to-follow recipes for your next cultural night or service learning fundraiser. Each one was shared with us on the road.</p>
+            </div>
 
-    <div class="card">
-      <h2>🍛 Plov</h2>
-      <img src="img/plov.jpg" alt="Plov">
-      <p>Fragrant Uzbek pilaf with carrots, rice, and lamb.</p>
-      <ul>
-        <li>Fry meat with onions and carrots.</li>
-        <li>Add rice and spices, pour in water.</li>
-        <li>Simmer covered until rice is cooked.</li>
-      </ul>
-    </div>
+            <div class="recipes-grid">
+                <article class="recipe-card">
+                    <img src="img/olivie.jpg" alt="Olivier Salad" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🥗 Olivier Salad</h3>
+                        <p>A festive staple packed with potatoes, carrots, eggs, and smoked sausage.</p>
+                        <ul class="recipe-steps">
+                            <li>Boil potatoes, carrots, and eggs until tender.</li>
+                            <li>Dice vegetables, sausage, and pickles into small cubes.</li>
+                            <li>Fold in peas and mayonnaise, season, and chill before serving.</li>
+                        </ul>
+                    </div>
+                </article>
 
-    <div class="card">
-      <h2>🥞 Pancakes with Honey</h2>
-      <img src="img/bliny.jpg" alt="Pancakes with Honey">
-      <p>Thin homemade pancakes served with honey or jam.</p>
-      <ul>
-        <li>Mix milk, eggs, flour, and sugar.</li>
-        <li>Fry pancakes on both sides in a pan.</li>
-        <li>Serve with honey or jam.</li>
-      </ul>
-    </div>
+                <article class="recipe-card">
+                    <img src="img/pasta.jpg" alt="Pasta Bolognese" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🍝 Pasta Bolognese</h3>
+                        <p>Italian pasta layered with a rich tomato and herb meat sauce.</p>
+                        <ul class="recipe-steps">
+                            <li>Sauté minced meat with onion, garlic, and herbs.</li>
+                            <li>Add crushed tomatoes and simmer for 20 minutes.</li>
+                            <li>Toss al dente pasta with the sauce and finish with parmesan.</li>
+                        </ul>
+                    </div>
+                </article>
 
-    <div class="card">
-      <h2>🥗 Caesar Salad with Chicken</h2>
-      <img src="img/caesar.jpg" alt="Caesar Salad">
-      <p>Popular salad with chicken, croutons, and Caesar dressing.</p>
-      <ul>
-        <li>Fry chicken until golden brown.</li>
-        <li>Tear lettuce leaves and add croutons.</li>
-        <li>Mix with Caesar dressing and sprinkle with parmesan.</li>
-      </ul>
-    </div>
-  </div>
+                <article class="recipe-card">
+                    <img src="img/cake.jpg" alt="Chocolate cake" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🍰 Chocolate Cake</h3>
+                        <p>A fluffy dessert with deep cocoa notes and glossy glaze.</p>
+                        <ul class="recipe-steps">
+                            <li>Whisk flour, cocoa, sugar, and eggs until smooth.</li>
+                            <li>Blend in milk and vegetable oil for a silky batter.</li>
+                            <li>Bake 40 minutes at 180°C, then crown with chocolate glaze.</li>
+                        </ul>
+                    </div>
+                </article>
 
-  <p>© 2025 Delicious Recipes</p>
+                <article class="recipe-card">
+                    <img src="img/borsh.jpg" alt="Borscht soup" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🍲 Borscht</h3>
+                        <p>Traditional beetroot soup served hot with sour cream and herbs.</p>
+                        <ul class="recipe-steps">
+                            <li>Simmer beef or chicken with aromatics for a rich broth.</li>
+                            <li>Add potatoes and shredded cabbage to the stock.</li>
+                            <li>Finish with sautéed beets, carrots, onions, and season to taste.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="recipe-card">
+                    <img src="img/pizza.jpg" alt="Margherita Pizza" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🍕 Margherita Pizza</h3>
+                        <p>A wood-fired favorite topped with tomatoes, mozzarella, and basil.</p>
+                        <ul class="recipe-steps">
+                            <li>Stretch dough and swipe on a bright tomato sauce.</li>
+                            <li>Layer with fresh mozzarella and basil leaves.</li>
+                            <li>Bake at high heat for 12–15 minutes until golden.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="recipe-card">
+                    <img src="img/plov.jpg" alt="Plov rice" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🍛 Plov</h3>
+                        <p>Fragrant Uzbek pilaf scented with cumin, coriander, and tender lamb.</p>
+                        <ul class="recipe-steps">
+                            <li>Sear lamb with onions and julienned carrots.</li>
+                            <li>Add rinsed rice, whole garlic, and warm water or stock.</li>
+                            <li>Steam gently under a lid until grains are fluffy.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="recipe-card">
+                    <img src="img/bliny.jpg" alt="Pancakes with honey" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🥞 Pancakes with Honey</h3>
+                        <p>Delicate crepes perfect for breakfast clubs or pop-up cafés.</p>
+                        <ul class="recipe-steps">
+                            <li>Blend milk, eggs, flour, sugar, and a pinch of salt.</li>
+                            <li>Cook thin pancakes on a hot buttered skillet.</li>
+                            <li>Serve stacked with honey or your favourite jam.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="recipe-card">
+                    <img src="img/caesar.jpg" alt="Caesar salad with chicken" class="recipe-image">
+                    <div class="recipe-content">
+                        <h3>🥗 Caesar Salad with Chicken</h3>
+                        <p>A crunchy classic finished with tangy dressing and parmesan snow.</p>
+                        <ul class="recipe-steps">
+                            <li>Sear seasoned chicken breasts until golden and slice.</li>
+                            <li>Tear crisp lettuce, add croutons and shaved parmesan.</li>
+                            <li>Toss with Caesar dressing and top with the warm chicken.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="recipe-card">
+                  <img src="img/sushi.jpg" alt="Sushi rolls" class="recipe-image">
+                  <div class="recipe-content">
+                      <h3>🍣 Sushi Rolls</h3>
+                      <p>Japanese delicacy combining vinegared rice, seaweed, and fresh fish or vegetables.</p>
+                      <ul class="recipe-steps">
+                          <li>Rinse rice until water runs clear and cook with a splash of rice vinegar.</li>
+                          <li>Place a sheet of nori on a bamboo mat, spread rice evenly over it.</li>
+                          <li>Add fillings like salmon, cucumber, or avocado and roll tightly.</li>
+                          <li>Slice into bite-sized pieces and serve with soy sauce and wasabi.</li>
+                      </ul>
+                  </div>
+              </article>
+            </div>
+
+            <p class="recipes-footer-note">Share your creations with us on social media using <strong>#DunyaKitchen</strong> so we can cheer you on from the road.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dunya Horizons</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Explore. Learn. Grow.</p>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Educational travel and sustainability experiences for global citizens.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="trips.html">School Trips</a></li>
+                        <li><a href="cas.html">CAS/Service Learning</a></li>
+                        <li><a href="camps.html">Summer Camps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="mission.html">Our Mission</a></li>
+                        <li><a href="team.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Emails: <br><a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</br></a>
+                            <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
+                        <li>Phones:<br><a href="tel:+9940505004114">+994 (050) 500-4114</a><br>
+                            <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
+                        <li>Address: Pushkin's Street 44</li>
+                        <li>Address: Reshad's Street 45</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                &copy; 2077 Dunya Horizons. All rights reserved. <br>
+                <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> |
+                <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a>
+                </p>
+           </div>
+        </div>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navMenu = document.getElementById('navMenu');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link && link.querySelector('.dropdown-arrow')) {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('mobile-open');
+                    }
+                });
+            }
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href')?.startsWith('#')) {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

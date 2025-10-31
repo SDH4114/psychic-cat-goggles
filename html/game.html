@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dunya Horizons — Викторина: День Победы Азербайджана</title>
+  <title>Dunya Horizons — Quiz: Victory Day of Azerbaijan</title>
   <link rel="stylesheet" href="css/nice.css"/>
   <link rel="icon" type="image/png" href="img/horizon.png"/>
-  <meta name="description" content="Интерактивная викторина в стиле «Кто хочет стать миллионером?» на тему Дня Победы в Азербайджане."/>
+  <meta name="description" content="Interactive quiz in the style of &quot;Who Wants to Be a Millionaire?&quot; focused on Azerbaijan's Victory Day."/>
 </head>
 <style>
-  /* Карточка викторины и заголовки */
+  /* Quiz card and headings */
   .card { border-radius: 18px; box-shadow: 0 12px 30px rgba(0,0,0,.06); }
   .card-body { padding: 36px; }
   #questionText { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--heading, #0f172a); }
 
-  /* Варианты ответа — аккуратные «пилюли» в вашем стиле */
+  /* Answer options styled as neat pills */
   #options { display: grid; gap: .75rem; }
   .btn.option{
     text-align: left; padding: 14px 16px; border-radius: 14px;
@@ -25,23 +25,23 @@
   .btn.option:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.06); border-color: rgba(16,185,129,.35); }
   .btn.option:disabled{ opacity:.9; cursor: default; }
 
-  /* Плашки прогресса/счёта */
+  /* Progress and score pills */
   .pill{ font-weight:600; letter-spacing:.2px; }
   #scorePill{ color: var(--heading, #0f172a); }
 
-  /* Итоговый экран */
+  /* Final result screen */
   .result-wrap{ display:flex; align-items:center; justify-content:center; gap:1.25rem; flex-wrap:wrap; }
   .result-stats p{ margin:.25rem 0; font-size: 15px; color: var(--heading, #0f172a); }
   .result-actions{ margin-top: 1rem; display:flex; gap:.5rem; justify-content:center; }
 
-  /* Круг прогресса */
+  /* Progress ring */
   .ring{ position:relative; width: 240px; height: 240px; }
   .ring svg{ width:100%; height:100%; transform: rotate(-90deg); }
   .ring-bg{ stroke: rgba(15,23,42,.08); stroke-width: 14; fill:none; }
   .ring-progress{ stroke: var(--primary, #10B981); stroke-width: 14; stroke-linecap: round; fill:none; transition: stroke-dashoffset .9s ease; }
   .ring-label{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
   .ring-score{ font-size: 24px; font-weight: 800; color: var(--heading, #0f172a); }
-    /* Красивая кнопка «Пройти ещё раз» */
+    /* Styled "Play again" button */
   #restartBtn{
     background: linear-gradient(135deg, var(--primary, #10B981), var(--secondary, #0EA5A4));
     color:#fff; border:none; border-radius: 999px; padding: 12px 22px;
@@ -51,7 +51,7 @@
   #restartBtn:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(16,185,129,.32); filter: saturate(1.05); }
   #restartBtn:active{ transform: translateY(0) scale(.98); }
 
-  /* Список обзора ответов */
+  /* Answer review list */
   .review-list{ margin-top: 1.25rem; display:grid; gap:.75rem; }
   .review-item{ background:#fff; border:1px solid rgba(15,23,42,.08); border-radius:14px; padding:12px 14px; }
   .review-item.is-correct{ border-color: rgba(30,142,62,.35); }
@@ -64,11 +64,11 @@
   .chip.correct{ border-color: rgba(30,142,62,.35); color: #1e8e3e; }
   .chip.wrong{ border-color: rgba(197,34,31,.35); color: #c5221f; }
 
-  /* Линейный прогресс сверху */
+  /* Top linear progress bar */
   .progress-wrap{ height:6px; background: rgba(15,23,42,.08); border-radius:999px; overflow:hidden; margin-top:.5rem; }
   .progress-bar{ height:100%; width:0%; background: linear-gradient(90deg, var(--primary, #10B981), var(--secondary, #0EA5A4)); transition: width .45s ease; }
 
-  /* Анимация появления вопроса */
+  /* Question fade-in animation */
   @keyframes qIn{ from{opacity:0; transform: translateY(10px);} to{opacity:1; transform:none;} }
   .q-in{ animation: qIn .28s ease both; }
 </style>
@@ -116,15 +116,15 @@
     <main class="container" style="padding-top: 7rem; padding-bottom: 4rem;">
       <section class="section" id="quiz">
         <div class="section-header" style="text-align:center;">
-          <h1 style="margin-bottom: .25rem;">Викторина</h1>
-          <p style="opacity:.8">Тема: Карабахские войны: 1988–1994 и 2020.</p>
+          <h1 style="margin-bottom: .25rem;">Quiz</h1>
+          <p style="opacity:.8">Theme: Karabakh Wars, 1988-1994 and 2020.</p>
         </div>
 
         <div class="card" style="max-width: 1100px; margin: 0 auto;">
           <div class="card-body">
             <div class="quiz-top" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
               <div class="pill" id="progressPill" style="padding:.4rem .8rem; border-radius:999px; background:var(--primary, #1a73e8); color:#fff;">
-                Вопрос <span id="qIndex">1</span>/<span id="qTotal">15</span>
+                Question <span id="qIndex">1</span>/<span id="qTotal">15</span>
               </div>
             </div>
             <div id="progressWrap" class="progress-wrap" aria-hidden="true">
@@ -140,7 +140,7 @@
             <div id="feedback" aria-live="polite" style="display:none;"></div>
 
             <div class="quiz-actions" style="display:flex; justify-content:center; align-items:center; margin-top:1rem;">
-              <button id="restartBtn" class="btn" style="display:none;">Пройти ещё раз</button>
+              <button id="restartBtn" class="btn" style="display:none;">Play Again</button>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@
                 <div class="footer-section">
                     <h3>Contacts us!</h3>
                     <ul class="footer-links">
-                        <li>Emails: <a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</a>
+                        <li>Emails: <br><a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</br></a>
                         <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
                         <li>Phones: <br><a href="tel:+9940505004114">+994 (050) 500-4114    <br> </a>
                         <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
@@ -183,14 +183,19 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2077 Dunya Horizons. All rights reserved. | <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> | <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a></p>
-            </div>
+                <p>
+                &copy; 2077 Dunya Horizons. All rights reserved. <br>
+                <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> |
+                <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a> |
+                <a href="food.html" style="color: var(--primary); font-weight: 600;">Are you a food lover?</a>
+                </p> 
+           </div>
         </div>
     </footer>
 
 
     <script>
-    // burger
+    // Burger menu toggle
     (function() {
       const burger = document.getElementById('burger');
       const navMenu = document.getElementById('navMenu');
@@ -206,100 +211,100 @@
 
     // Quiz data
     const QUESTIONS = [
-      // 1–10: ВТОРАЯ Карабахская война (2020)
+      // 1-10: Second Karabakh War (2020)
       {
-        q: 'ВТОРАЯ Карабахская война: когда она началась?',
-        opts: ['27 сентября 2020', '10 ноября 2020', '1 октября 2020', '15 сентября 2020'],
+        q: 'Second Karabakh War: When did it start?',
+        opts: ['27 September 2020', '10 November 2020', '1 October 2020', '15 September 2020'],
         correct: 0
       },
       {
-        q: 'ВТОРАЯ Карабахская война: когда вступило в силу перемирие?',
-        opts: ['8 ноября 2020', '9 ноября 2020', '10 ноября 2020', '1 декабря 2020'],
+        q: 'Second Karabakh War: When did the ceasefire take effect?',
+        opts: ['8 November 2020', '9 November 2020', '10 November 2020', '1 December 2020'],
         correct: 2
       },
       {
-        q: 'ВТОРАЯ Карабахская война: сколько примерно дней она шла?',
-        opts: ['50 дней', '43 дней', '44 дня', '45 дней'],
+        q: 'Second Karabakh War: Approximately how many days did it last?',
+        opts: ['50 days', '43 days', '44 days', '45 days'],
         correct: 2
       },
       {
-        q: 'ВТОРАЯ Карабахская война: какой город стал символом Победы Азербайджана?',
-        opts: ['Шуша', 'Гянджа', 'Нахчыван', 'Бərdə'],
+        q: 'Second Karabakh War: Which city became the symbol of Azerbaijan\'s victory?',
+        opts: ['Shusha', 'Ganja', 'Nakhchivan', 'Barda'],
         correct: 0
       },
       {
-        q: 'ВТОРАЯ Карабахская война: какой день считается в Азербайджане Днём Победы?',
-        opts: ['27 сентября', '8 ноября', '10 ноября', '1 декабря'],
+        q: 'Second Karabakh War: Which day is celebrated as Victory Day in Azerbaijan?',
+        opts: ['27 September', '8 November', '10 November', '1 December'],
         correct: 1
       },
       {
-        q: 'ВТОРАЯ Карабахская война: кто подписал заявление о прекращении огня?',
+        q: 'Second Karabakh War: Who signed the ceasefire declaration?',
         opts: [
-          'Ильхам Алиев, Никол Пашинян, Владимир Путин',
-          'Реджеп Тайип Эрдоган, Ильхам Алиев',
-          'Эммануэль Макрон, Никол Пашинян',
-          'Только министры обороны'
+          'Ilham Aliyev, Nikol Pashinyan, Vladimir Putin',
+          'Recep Tayyip Erdogan, Ilham Aliyev',
+          'Emmanuel Macron, Nikol Pashinyan',
+          'Only the ministers of defense'
         ],
         correct: 0
       },
       {
-        q: 'ВТОРАЯ Карабахская война: какие районы были переданы Азербайджану по соглашению?',
+        q: 'Second Karabakh War: Which districts were handed over to Azerbaijan under the agreement?',
         opts: [
-          'Агдам, Кельбаджар, Лачын',
-          'Баку, Сумгайыт, Гянджа',
-          'Шуша, Физули, Ходжавенд',
-          'Только Лачын'
+          'Aghdam, Kalbajar, Lachin',
+          'Baku, Sumgayit, Ganja',
+          'Shusha, Fuzuli, Khojavend',
+          'Only Lachin'
         ],
         correct: 0
       },
       {
-        q: 'ВТОРАЯ Карабахская война: какую страну открыто поддерживала Турция?',
-        opts: ['Азербайджан', 'Армению', 'Грузию', 'Россию'],
+        q: 'Second Karabakh War: Which country did Turkey openly support?',
+        opts: ['Azerbaijan', 'Armenia', 'Georgia', 'Russia'],
         correct: 0
       },
       {
-        q: 'ВТОРАЯ Карабахская война: какую роль взяла на себя Россия после войны?',
-        opts: ['Отправила миротворцев', 'Объявила санкции', 'Вступила в войну', 'Ничего не сделала'],
+        q: 'Second Karabakh War: What role did Russia assume after the war?',
+        opts: ['Deployed peacekeepers', 'Imposed sanctions', 'Entered the war', 'Did nothing'],
         correct: 0
       },
       {
-        q: 'ВТОРАЯ Карабахская война: почему 2020 год важен для Азербайджана?',
+        q: 'Second Karabakh War: Why is 2020 significant for Azerbaijan?',
         opts: [
-          'Из-за второй Карабахской войны и возвращения территорий',
-          'Из-за чемпионата мира',
-          'Из-за Олимпиады',
-          'Из-за отмены налогов'
+          'Because of the Second Karabakh War and the liberation of territories',
+          'Because of the World Cup',
+          'Because of the Olympics',
+          'Because taxes were abolished'
         ],
         correct: 0
       },
-      // 11–15: ПЕРВАЯ Карабахская война (1988–1994)
+      // 11-15: First Karabakh War (1988-1994)
       {
-        q: 'ПЕРВАЯ Карабахская война: в каком году начался конфликт?',
+        q: 'First Karabakh War: In which year did the conflict begin?',
         opts: ['1988', '1992', '1999', '2005'],
         correct: 0
       },
       {
-        q: 'ПЕРВАЯ Карабахская война: когда было достигнуто прекращение огня?',
-        opts: ['Май 1994', 'Ноябрь 1993', 'Октябрь 1995', 'Апрель 2000'],
+        q: 'First Karabakh War: When was the ceasefire achieved?',
+        opts: ['May 1994', 'November 1993', 'October 1995', 'April 2000'],
         correct: 0
       },
       {
-        q: 'ПЕРВАЯ Карабахская война: сколько примерно людей погибло?',
-        opts: ['Около 28–38 тысяч', 'Около 2–3 тысяч', 'Около 100 тысяч', 'Около 500 человек'],
+        q: 'First Karabakh War: Approximately how many people were killed?',
+        opts: ['About 28-38 thousand', 'About 2-3 thousand', 'About 100 thousand', 'About 500 people'],
         correct: 0
       },
       {
-        q: 'ПЕРВАЯ Карабахская война: какой документ закрепил прекращение огня?',
-        opts: ['Бишкекский протокол', 'Минские договорённости 2015', 'Парижское соглашение', 'Хельсинкский акт'],
+        q: 'First Karabakh War: Which document formalized the ceasefire?',
+        opts: ['Bishkek Protocol', 'Minsk Agreements 2015', 'Paris Agreement', 'Helsinki Final Act'],
         correct: 0
       },
       {
-        q: 'ПЕРВАЯ Карабахская война: каков был результат для Азербайджана к 1994 году?',
+        q: 'First Karabakh War: What was the outcome for Azerbaijan by 1994?',
         opts: [
-          'Часть территорий вокруг Карабаха была оккупирована армянскими силами',
-          'Азербайджан вернул все территории',
-          'Границы СССР были сохранены',
-          'Территория была передана ООН'
+          'Parts of the territories around Karabakh were occupied by Armenian forces',
+          'Azerbaijan regained all territories',
+          'The borders of the USSR were preserved',
+          'The territory was handed over to the UN'
         ],
         correct: 0
       }
@@ -365,14 +370,14 @@
         options.appendChild(btn);
       });
 
-      // плавная анимация появления вопроса и опций
+      // smooth fade for question and options
       qText.classList.remove('q-in');
       options.classList.remove('q-in');
-      void qText.offsetWidth; void options.offsetWidth; // reflow для перезапуска анимации
+      void qText.offsetWidth; void options.offsetWidth; // reflow to restart the animation
       qText.classList.add('q-in');
       options.classList.add('q-in');
 
-      // обновляем прогресс-бар
+      // update progress bar
       updateProgress();
     }
 
@@ -409,24 +414,24 @@
       const total = QUESTIONS.length;
       const percent = Math.round((right / total) * 100);
 
-      // Заголовок и контейнер
-      qText.textContent = 'Результат';
+      // Heading and container
+      qText.textContent = 'Results';
       options.innerHTML = '';
       feedback.innerHTML = '';
       if (progressPill) progressPill.style.display = 'none';
       if (progressWrap) progressWrap.style.display = 'none';
       restart.style.display = 'inline-flex';
 
-      // Разметка результата с кругом
-      const R = 80;                               // радиус круга
-      const CIRC = 2 * Math.PI * R;               // длина окружности
+      // Layout for the result ring
+      const R = 80;                               // radius of the circle
+      const CIRC = 2 * Math.PI * R;               // circumference
       const ratio = right / total;
       const offset = CIRC * (1 - ratio);
 
       const result = document.createElement('div');
       result.className = 'result-wrap';
       result.innerHTML = `
-        <div class="ring" aria-label="Итог: ${right} из ${total}">
+        <div class="ring" aria-label="Result: ${right} of ${total}">
           <svg viewBox="0 0 200 200" role="img">
             <circle class="ring-bg" cx="100" cy="100" r="${R}"></circle>
             <circle id="ringProgress" class="ring-progress"
@@ -439,13 +444,13 @@
           </div>
         </div>
         <div class="result-stats">
-          <p><strong>Правильных:</strong> ${right}</p>
-          <p><strong>Неверных:</strong> ${wrong}</p>
+          <p><strong>Correct:</strong> ${right}</p>
+          <p><strong>Incorrect:</strong> ${wrong}</p>
         </div>
       `;
       options.appendChild(result);
 
-      // Список обзора всех ответов
+      // Review list of all answers
       const review = document.createElement('div');
       review.className = 'review-list';
       const letter = (n) => String.fromCharCode(65 + n);
@@ -455,20 +460,20 @@
         const isOk = chosen === correct;
         const item = document.createElement('div');
         item.className = 'review-item ' + (isOk ? 'is-correct' : 'is-wrong');
-        const chosenText = chosen != null ? `${letter(chosen)}) ${qq.opts[chosen]}` : '—';
+        const chosenText = chosen != null ? `${letter(chosen)}) ${qq.opts[chosen]}` : 'Not answered';
         const correctText = `${letter(correct)}) ${qq.opts[correct]}`;
         item.innerHTML = `
           <div class="review-q"><span class="badge">${i+1}</span> ${qq.q}</div>
           <div class="review-a">
-            <div class="chip ${isOk ? 'correct' : 'wrong'} chosen">Вы выбрали: ${chosenText}</div>
-            <div class="chip correct">Правильный: ${correctText}</div>
+            <div class="chip ${isOk ? 'correct' : 'wrong'} chosen">You chose: ${chosenText}</div>
+            <div class="chip correct">Correct answer: ${correctText}</div>
           </div>
         `;
         review.appendChild(item);
       });
       options.appendChild(review);
 
-      // Плавное заполнение круга
+      // Smooth circle animation
       requestAnimationFrame(() => {
         const ring = document.getElementById('ringProgress');
         ring.style.strokeDashoffset = String(offset);
