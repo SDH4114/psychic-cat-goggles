@@ -166,14 +166,14 @@
 <body>
     <header class="header" id="header">
         <div class="header-content">
-            <a href="Nice.html#home" class="logo">
+            <a href="index.html#home" class="logo">
                 <img src="img/horizon.png" alt="Dunya Horizons logo" class="logo-image">
                 Dunya Horizons
             </a>
             <nav>
                 <ul class="nav-menu" id="navMenu">
                     <li class="nav-item">
-                        <a href="Nice.html#home" class="nav-link">Home</a>
+                        <a href="index.html#home" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
                         <a href="mission.html" class="nav-link">
@@ -197,7 +197,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="Nice.html#blog" class="nav-link">Students Projects</a>
+                        <a href="index.html#blog" class="nav-link">Students Projects</a>
                     </li>
                     <li class="nav-item">
                         <a href="game.html" class="nav-link">Game</a>
@@ -378,35 +378,69 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Contact Us</h3>
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
                     <ul class="footer-links">
                         <li>Emails: <br><a href="mailto:chaos.net2000@gmail.com">chaos.net2000@gmail.com</br></a>
-                            <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a></li>
+                        <a href="mailto:rasad222777@gmail.com">rasad222777@gmail.com</a>
+                        <a href="mailto:ishalmayeva@dunyaschool.edu.az">ishalmayeva@dunyaschool.edu.az</a></li>
                         <li>Phones:<br><a href="tel:+9940505004114">+994 (050) 500-4114</a><br>
-                            <a href="tel:+9940557806642">+994 (055) 780-6642</a></li>
+                        <a href="tel:+9940557806642">+994 (055) 780-6642</a><br>
+                        <a href="tel:+9940513706776">+994 (051) 380-6776</a></li>
+
                         <li>Address: Pushkin's Street 44</li>
-                        <li>Address: Reshad's Street 45</li>
+                        <li>Reshad's Street 45</li>
+                        <li>Lalaland's Street 67</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>
                 &copy; 2077 Dunya Horizons. All rights reserved. <br>
-                <a href="Nice.html#privacy" style="color: inherit;">Privacy Policy</a> |
-                <a href="Nice.html#terms" style="color: inherit;">Terms of Service</a>
+                <a href="index.html#privacy" style="color: inherit;">Privacy Policy</a> |
+                <a href="index.html#terms" style="color: inherit;">Terms of Service</a>
                 </p>
            </div>
         </div>
     </footer>
 
     <script>
+        // Mobile navigation
         const burger = document.getElementById('burger');
         const navMenu = document.getElementById('navMenu');
         const navItems = document.querySelectorAll('.nav-item');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const dropdownLinks = navMenu ? navMenu.querySelectorAll('.dropdown a') : [];
 
-        burger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+        if (burger) {
+            burger.setAttribute('aria-expanded', 'false');
+        }
+
+        const setMenuState = (isOpen) => {
+            if (!navMenu) return;
+            navMenu.classList.toggle('active', isOpen);
+            document.body.classList.toggle('nav-open', isOpen);
+            if (burger) {
+                burger.classList.toggle('is-active', isOpen);
+                burger.setAttribute('aria-expanded', String(isOpen));
+            }
+        };
+
+        if (burger && navMenu) {
+            burger.addEventListener('click', () => {
+                const nextState = !navMenu.classList.contains('active');
+                setMenuState(nextState);
+            });
+        }
+
+        const closeMenuOnLink = (link) => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    setMenuState(false);
+                    navItems.forEach(item => item.classList.remove('mobile-open'));
+                }
+            });
+        };
 
         navItems.forEach(item => {
             const link = item.querySelector('.nav-link');
@@ -420,6 +454,21 @@
             }
         });
 
+        navLinks.forEach(link => {
+            if (!link.querySelector('.dropdown-arrow')) {
+                closeMenuOnLink(link);
+            }
+        });
+
+        dropdownLinks.forEach(closeMenuOnLink);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                setMenuState(false);
+                navItems.forEach(item => item.classList.remove('mobile-open'));
+            }
+        });
+
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -430,7 +479,6 @@
         });
 
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
 
         window.addEventListener('scroll', () => {
             let current = '';
